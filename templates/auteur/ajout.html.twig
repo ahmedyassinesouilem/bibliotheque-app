@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Ajout d'un Auteur{% endblock %}
+
+{% block body %}
+    <h1>Ajout d'un Auteur</h1>
+
+    {{ form_start(form) }}
+        {{ form_widget(form) }}
+        <button class="btn btn-primary">Ajouter</button>
+    {{ form_end(form) }}
+
+    <a href="{{ path('app_auteur') }}" class="btn btn-secondary">Retour</a>
+{% endblock %}

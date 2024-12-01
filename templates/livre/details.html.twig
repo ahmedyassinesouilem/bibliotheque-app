@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Détails du Livre{% endblock %}
+
+{% block body %}
+    <h1>Détails du Livre</h1>
+
+    <div>
+        <h2>{{ livre.titre }}</h2>
+        <p><strong>ISBN :</strong> {{ livre.isbn }}</p>
+        <p><strong>Disponible :</strong> {{ livre.disponible ? 'Oui' : 'Non' }}</p>
+        <p><strong>Genre :</strong> {{ livre.genre ? livre.genre.nom : 'Non défini' }}</p>
+        <p><strong>Auteurs :</strong>
+            {% for auteur in livre.auteur %}
+                {{ auteur.nom }}{% if not loop.last %}, {% endif %}
+            {% else %}
+                Aucun auteur
+            {% endfor %}
+        </p>
+        <p><strong>Image :</strong></p>
+        {% if livre.image %}
+            <img src="{{ asset('uploads/' ~ livre.image) }}" alt="{{ livre.titre }}" style="max-width: 300px;">
+        {% else %}
+            <p>Aucune image disponible.</p>
+        {% endif %}
+    </div>
+
+    <a href="{{ path('app_acceuil') }}" class="btn btn-secondary">Retour à l'accueil</a>
+{% endblock %}

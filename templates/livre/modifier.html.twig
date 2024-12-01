@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modifier le livre{% endblock %}
+
+{% block body %}
+    <div class="container my-4">
+        <h1>Modifier le livre: {{ livre.titre }}</h1>
+
+        {{ form_start(form) }}
+            <div class="mb-3">
+                {{ form_row(form.titre) }}
+            </div>
+            <div class="mb-3">
+                {{ form_row(form.isbn) }}
+            </div>
+            <div class="mb-3">
+                {{ form_row(form.disponible) }}
+            </div>
+            <div class="mb-3">
+                {{ form_row(form.auteur) }}
+            </div>
+            <div class="mb-3">
+                {{ form_row(form.genre) }}
+            </div>
+            <div class="mb-3">
+                <label for="form_image" class="form-label">Image</label>
+                <div>
+                    {% if livre.image %}
+                        <img src="{{ asset('uploads/livres/' ~ livre.image) }}" alt="Image du livre" class="img-fluid mb-2" style="max-width: 150px;">
+                    {% else %}
+                        <p>Aucune image disponible</p>
+                    {% endif %}
+                </div>
+                {{ form_row(form.image) }}
+            </div>
+            <div class="mb-3">
+                <button type="submit" class="btn btn-primary">Sauvegarder les modifications</button>
+            </div>
+        {{ form_end(form) }}
+
+        <a href="{{ path('lister_livres') }}" class="btn btn-secondary">Retour à la liste des livres</a>
+    </div>
+{% endblock %}

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Welcome!{% endblock %}</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text><text y=%221.3em%22 x=%220.2em%22 font-size=%2276%22 fill=%22%23fff%22>sf</text></svg>">
+
+    <!-- Stylesheets -->
+    <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
+    {% block stylesheets %}{% endblock %}
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">Navbar</a>
+            <img src="{{ asset('image.png') }}" alt="Logo" style="width: 50px; height: 50px; margin-right: 10px;">
+            
+            <!-- Toggler Button for Mobile View -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <!-- Navbar Links -->
+            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="#">Acceuil</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Book</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{path('app_auteur')}}">Author</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Editor</a>
+                    </li>
+                </ul>
+
+                <!-- Right-Aligned Logout Button (only visible when logged in) -->
+                {% if app.user %}
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item">
+                            <span class="navbar-text me-2">Hello, {{ app.user.nom }}</span>
+                        </li>
+                        <li class="nav-item">
+                            <a class="btn btn-link" href="{{ path('app_login') }}">Logout</a>
+                        </li>
+                    </ul>
+                {% endif %}
+            </div>
+        </div>
+    </nav>
+
+    <!-- Search Bar Section -->
+    <div class="container my-4">
+        <div class="input-group">
+            <input type="search" id="form1" class="form-control" placeholder="Search..." />
+            <button type="button" class="btn btn-primary">
+                <i class="fas fa-search"></i> Recherche
+            </button>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main>
+        {% block body %}{% endblock %}
+    </main>
+
+    <!-- Scripts -->
+    <script src="{{ asset('js/bootstrap.bundle.min.js') }}"></script>
+</body>
+</html>

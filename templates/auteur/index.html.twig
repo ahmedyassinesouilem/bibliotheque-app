@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des Auteurs{% endblock %}
+
+{% block body %}
+    <h1>Liste des Auteurs</h1>
+
+    <a href="{{ path('app_auteur_ajout') }}" class="btn btn-primary mb-3">Ajouter un Auteur</a>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Nom</th>
+                <th>Biographie</th>
+                <th>Date de Naissance</th>
+                <th>livres</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for auteur in auteurs %}
+                <tr>
+                    <td>{{ auteur.id }}</td>
+                    <td>{{ auteur.nom }}</td>
+                    <td>{{ auteur.biographie|default('Non renseignée') }}</td>
+                    <td>{{ auteur.dateNaissance ? auteur.dateNaissance|date('d/m/Y') : 'Non renseignée' }}</td>
+                    <td>
+                        {% if auteur.livres|length > 0 %}
+                            {% for livre in auteur.livres %}
+                                {{ livre.titre }}{% if not loop.last %}, {% endif %}
+                            {% endfor %}
+                        {% else %}
+                            Aucun livre
+                        {% endif %}
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="4">Aucun auteur trouvé.</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
